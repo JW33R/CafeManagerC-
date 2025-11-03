@@ -1,0 +1,15 @@
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\obj\Debug\net8.0\CafeManager.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\obj\Debug\net8.0\CafeManager.AssemblyInfoInputs.cache
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\obj\Debug\net8.0\CafeManager.AssemblyInfo.cs
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\obj\Debug\net8.0\CafeManager.csproj.CoreCompileInputs.cache
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\obj\Debug\net8.0\CafeManager.sourcelink.json
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\bin\Debug\net8.0\CafeManager.exe
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\bin\Debug\net8.0\CafeManager.deps.json
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\bin\Debug\net8.0\CafeManager.runtimeconfig.json
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\bin\Debug\net8.0\CafeManager.dll
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\bin\Debug\net8.0\CafeManager.pdb
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\obj\Debug\net8.0\CafeManager.dll
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\obj\Debug\net8.0\refint\CafeManager.dll
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\obj\Debug\net8.0\CafeManager.pdb
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\obj\Debug\net8.0\CafeManager.genruntimeconfig.cache
+C:\Users\JW33R\Source\Repos\CafeManagerC-\CafeManager\obj\Debug\net8.0\ref\CafeManager.dll
