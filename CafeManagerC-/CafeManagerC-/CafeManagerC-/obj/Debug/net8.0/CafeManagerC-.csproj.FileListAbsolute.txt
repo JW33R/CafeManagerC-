@@ -1,0 +1,5 @@
+C:\Users\JW33R\source\repos\New folder\CafeManagerC-\CafeManagerC-\obj\Debug\net8.0\CafeManagerC-.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\JW33R\source\repos\New folder\CafeManagerC-\CafeManagerC-\obj\Debug\net8.0\CafeManagerC-.AssemblyInfoInputs.cache
+C:\Users\JW33R\source\repos\New folder\CafeManagerC-\CafeManagerC-\obj\Debug\net8.0\CafeManagerC-.AssemblyInfo.cs
+C:\Users\JW33R\source\repos\New folder\CafeManagerC-\CafeManagerC-\obj\Debug\net8.0\CafeManagerC-.csproj.CoreCompileInputs.cache
+C:\Users\JW33R\source\repos\New folder\CafeManagerC-\CafeManagerC-\obj\Debug\net8.0\CafeManagerC-.sourcelink.json
