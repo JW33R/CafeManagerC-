@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using System.Linq;
 
 namespace CafeManager
 {
@@ -11,7 +12,7 @@ namespace CafeManager
         }
         public static List<string> Items = new List<string>();
         public static List<decimal> Price = new List<decimal>();
-        public static List<int> Quanity = new List<int>();
+        public static List<int> Quantity = new List<int>();
         static void AddItem()
         {
             ClearScreen();
@@ -20,7 +21,7 @@ namespace CafeManager
             string Decision3 = "";
             while (Decision1.ToUpper() != "DONE")
             {
-                Console.WriteLine("Which item would you like to Add? Type \"Done\" when finsihed.");
+                Console.WriteLine("Which item would you like to Add? Type \"Done\" when finished.");
                 Decision1 = Console.ReadLine();
                 if (Decision1.ToUpper() == "DONE")
                 {
@@ -31,25 +32,29 @@ namespace CafeManager
                     Console.WriteLine("You can't do that.");
                     AddItem();
                 }
-                Console.WriteLine("What is the Price?");
-                Decision2 = Console.ReadLine();
-                while (Convert.ToDecimal(Decision2) <= 0)
+                if (Decision1.ToUpper() != "DONE")
                 {
-                    Console.WriteLine("You can't do that.");
+
                     Console.WriteLine("What is the Price?");
                     Decision2 = Console.ReadLine();
-                }
-                Console.WriteLine("How Many?");
-                Decision3 = Console.ReadLine();
-                while (Convert.ToInt32(Decision3) <= 0)
-                {
-                    Console.WriteLine("You can't do that.");
+                    while (Convert.ToDecimal(Decision2) <= 0)
+                    {
+                        Console.WriteLine("You can't do that.");
+                        Console.WriteLine("What is the Price?");
+                        Decision2 = Console.ReadLine();
+                    }
                     Console.WriteLine("How Many?");
                     Decision3 = Console.ReadLine();
+                    while (Convert.ToInt32(Decision3) <= 0)
+                    {
+                        Console.WriteLine("You can't do that.");
+                        Console.WriteLine("How Many?");
+                        Decision3 = Console.ReadLine();
+                    }
+                    Items.Add(Decision1);
+                    Price.Add(Convert.ToDecimal(Decision2));
+                    Quantity.Add(Convert.ToInt32(Decision3));
                 }
-                Items.Add(Decision1);
-                Price.Add(Convert.ToDecimal(Decision2));
-                Quanity.Add(Convert.ToInt32(Decision3));
                 ViewCart();
                 ClearScreen();
 
@@ -61,7 +66,7 @@ namespace CafeManager
             ClearScreen();
             for (int i = 0; i < Items.Count(); i++)
             {
-                Console.WriteLine($"Items: {Items[i]} || Price: {Price[i]} || Quanity: {Quanity[i]}");
+                Console.WriteLine($"Items: {Items[i]} || Price: ${Price[i]} || Quantity: {Quantity[i]}");
             }
             PressContinue();
         }
@@ -70,10 +75,10 @@ namespace CafeManager
             ClearScreen();
             var MenuNumber = "";
 
-            while (MenuNumber != "5")
+            while (MenuNumber != "7")
             {
                 ClearScreen();
-                Console.WriteLine("1. Add Item\n2. Remove Item\n3. View Cart\n4. Checkout\n5. Quit");
+                Console.WriteLine("1. Add Item\n2. Remove Item\n3. View Cart\n4. Checkout\n5. Save Cart\n6. Load Cart\n7. Quit");
                 MenuNumber = Console.ReadLine();
 
                 switch (MenuNumber)
@@ -90,6 +95,12 @@ namespace CafeManager
                     case "4":
                         CheckOut();
                         break;
+                    case "5":
+                        SaveCart();
+                        break;
+                    case "6":
+                        LoadCart();
+                        break;
                     default:
                         Console.WriteLine("Goodbye...");
                         break;
@@ -100,7 +111,7 @@ namespace CafeManager
         static void RemoveItems()
         {
             ClearScreen();
-            if (Items != [])
+            if (Items.Count() != 0)
             {
 
                 for (int i = 0; i < Items.Count(); i++)
@@ -108,8 +119,15 @@ namespace CafeManager
                     Console.WriteLine($"Items {i + 1}.{Items[i]}.");
                 }
                 Console.WriteLine("Which Item Would you like to Remove?");
-                int itemToRemove = Console.ReadLine();
-                return Items.Remove(itemToRemove - 1), Price.Remove(itemToRemove - 1), Quanity.Remove(itemToRemove - 1);
+                var itemToRemove = Console.ReadLine();
+
+                Items.RemoveAt(Convert.ToInt32(itemToRemove) - 1); 
+                Price.RemoveAt(Convert.ToInt32(itemToRemove) - 1); 
+                Quantity.RemoveAt(Convert.ToInt32(itemToRemove) - 1);
+            }
+            else
+            {
+                Console.WriteLine("You can't remove nothing!");
             }
 
         }
@@ -152,7 +170,32 @@ namespace CafeManager
 
             }
             decimal finalAmount = TotalAmount() - ComputeDiscount() + ComputeTax();
-            Console.WriteLine($"Total Amount: {TotalAmount()} || Tax: {ComputeTax()} || Discount Savings: {ComputeDiscount()} Final Amount: {finalAmount}");
+            Console.WriteLine($"Total Amount: ${TotalAmount()} || Tax: ${ComputeTax()} || Discount Savings: ${ComputeDiscount()} Final Amount: ${finalAmount}");
+            PressContinue();
+        }
+        static void LoadCart()
+        {
+            string rawData = File.ReadAllText("CafeManager.csv");
+
+            string[] listData = rawData.Split(",");
+            for (int line = 0; line < listData.Count() - 1; line += 3)
+            {
+                Items.Add(listData[line]);
+                Price.Add(Convert.ToDecimal(listData[line + 1]));
+                Quantity.Add(Convert.ToInt32(listData[line + 2]));
+
+            }
+            Console.WriteLine("Your cart has been loaded!");
+            PressContinue();
+        }
+        static void SaveCart()
+        {
+            File.Delete("CafeManager.csv");
+            for (int i = 0; i < Items.Count(); i++)
+            {
+                File.AppendAllText("CafeManager.csv", $"{Items[i]},{Price[i]},{Quantity[i]},");
+            }
+            Console.WriteLine("Your cart has been saved!");
             PressContinue();
         }
         static decimal ComputeTax()
@@ -166,7 +209,7 @@ namespace CafeManager
             decimal theRealTotal = 0;
             for (int i = 0; i < Items.Count(); i++)
             {
-                decimal total = Price[i] * Quanity[i];
+                decimal total = Price[i] * Quantity[i];
                 theRealTotal = theRealTotal + total;
             }
             return theRealTotal;
